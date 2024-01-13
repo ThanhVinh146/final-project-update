@@ -6,7 +6,25 @@ public class Product {
 	private int price;
 	private String imgName;
 	private boolean isNew;
+	private int quantity;
+	private String description;
     
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Product() {}
 
 	public Product(int id, String name, int price, String imgName, boolean isNew) {
@@ -16,6 +34,17 @@ public class Product {
 		this.price = price;
 		this.imgName = imgName;
 		this.isNew = isNew;
+	}
+	
+
+	public Product(int id, String name, int price, String imgName, int quantity, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.imgName = imgName;
+		this.quantity = quantity;
+		this.description = description;
 	}
 
 	public String getName() {
@@ -47,7 +76,7 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public boolean isNew() {
+	public boolean getIsNew() {
 		return isNew;
 	}
 	public void setNew(boolean isNew) {

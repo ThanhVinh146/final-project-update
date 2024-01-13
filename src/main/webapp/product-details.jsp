@@ -1,25 +1,9 @@
-<%@page import="java.util.List"%>
-<%@page import="dao.ProductDAO"%>
-<%@page import="entity.Product"%>
-<%@page import="java.util.ArrayList"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-
-<%
-Integer productId = null;
-String productIdFromReq = request.getParameter("productId");
-
-//convert string to int
-if (productIdFromReq != null) {
-	productId = Integer.parseInt(productIdFromReq);
-}
-
-Product product = ProductDAO.getProductById(productId);
-pageContext.setAttribute("product", product);
-%>
 <head>
 <!-- Basic -->
 <meta charset="utf-8" />
@@ -65,7 +49,7 @@ pageContext.setAttribute("product", product);
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav  ">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.jsp">Home <span class="sr-only">(current)</span></a>
+							href="Home">Home <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="shop.jsp">
 								Shop </a></li>
@@ -115,8 +99,8 @@ pageContext.setAttribute("product", product);
 				<div class="col-sm-6 col-md-4 col-lg-9">
 					<div class="box">
 						Price: $${product.price} <br> Description :
-						${product.productDescription} <br> Quantity:
-						${product.quantiy}
+						${product.description} <br> Quantity:
+						${product.quantity}
 					</div>
 				</div>
 			</div>

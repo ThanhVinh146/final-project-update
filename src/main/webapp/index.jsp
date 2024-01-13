@@ -2,17 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="entity.Product"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dao.ProductDAO" %>
+
 <html>
-<%
-ProductDAO productDAO = new ProductDAO();
 
-pageContext.setAttribute("lastestProducts", productDAO.getLastestProducts());
-
-%>
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -58,29 +50,20 @@ pageContext.setAttribute("lastestProducts", productDAO.getLastestProducts());
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav  ">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="Home">Home <span class="sr-only">(current)</span></a>
             </li>
+            <c:forEach items="${categories}" var="category">
             <li class="nav-item">
-              <a class="nav-link" href="shop.html">
-                Shop
-              </a>
+              <a class="nav-link" href="Home?categoryId=${category.id}">${category.name}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="why.html">
-                Why Us
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="testimonial.html">
-                Testimonial
-              </a>
-            </li>
+             </c:forEach>
+          
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
           </ul>
           <div class="user_option">
-            <a href="">
+            <a href="LoginController">
               <i class="fa fa-user" aria-hidden="true"></i>
               <span>
                 Login
@@ -111,6 +94,20 @@ pageContext.setAttribute("lastestProducts", productDAO.getLastestProducts());
 
   <section class="shop_section layout_padding">
     <div class="container">
+    <div class="container container-bg">
+    <div class="row">
+    <div class="col-md-6 col-lg-5 px-0">
+          <form action="index.jsp">
+            <div>
+              <input type="text" placeholder="Product Name" name="searchValue"/>
+            </div>
+            
+            <div class="d-flex ">
+             <input type="submit" value="Search">
+            </div>
+          </form>
+        </div>
+        </div></div>
       <div class="heading_container heading_center">
         <h2>
           Latest Products
@@ -120,7 +117,7 @@ pageContext.setAttribute("lastestProducts", productDAO.getLastestProducts());
        <c:forEach items="${lastestProducts}" var="product">
        <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="box">
-            <a href="product-details.jsp?productId=${product.id}">
+            <a href="Details?productId=${product.id}">
               <div class="img-box">
                 <img src="images/${product.imgName}" alt="">
               </div>
@@ -132,19 +129,21 @@ pageContext.setAttribute("lastestProducts", productDAO.getLastestProducts());
                   Price <span>$${product.price}</span>
                 </h6>
               </div>
-              <div class="new">
-                <span>
-                  New
-                </span>
-              </div>
+              <c:if test="${product.isNew}">
+									<div class="new">
+										<span> New </span>
+									</div>
+								</c:if>
             </a>
           </div>
         </div>
         </c:forEach>
-        <a href="product-listing-page.jsp">
+        </div>
+        <div class="btn-box">
+        <a href="Home?action=SHOW_ALL">
                          View All Products
         </a>
-      </div>
+      </div></div>
   </section>
 
   <!-- end shop section -->
