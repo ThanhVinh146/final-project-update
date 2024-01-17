@@ -31,5 +31,38 @@ public class UserDAO {
 	        }
 	    return null;
 	}
+	public User registerNewAccount( String username, String password) throws SQLException {
+		Connection connection = Dbconnection.makeConnection();
+		if (checkExistedEmailAndUsername(username)==1) {
+			return null;
+		} else {
+			String sqlQuery = "INSERT INTO user (username, password) VALUES (?,?)";
+			PreparedStatement preStmt = connection.prepareStatement(sqlQuery);
 
+			
+			preStmt.setString(1, username);
+			preStmt.setString(2, password);
+
+			preStmt.executeUpdate();
+			return new User();
+		}
+
+	}
+	private int checkExistedEmailAndUsername( String username) throws SQLException {
+		Connection connection = Dbconnection.makeConnection();
+		String sqlQuery = "SELECT COUNT(*) FROM user WHERE  username=?";
+		PreparedStatement preStmt = connection.prepareStatement(sqlQuery);
+		
+		preStmt.setString(1, username);
+		ResultSet resultSet = preStmt.executeQuery();
+
+		if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count;
+        }
+		return -1;
+	}
+	
 }
+
+

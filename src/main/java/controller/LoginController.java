@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import entity.User;
@@ -18,7 +19,10 @@ import entity.User;
  */
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
+	
+	UserDAO userDao=new UserDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,14 +37,44 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		try {
+			
+			String action = request.getParameter("action");
+			if (action != null) {
+
+				switch (action) {
+				case "LOG_IN": {
+					login(request, response);
+					break;
+				}
+
+				case "LOG_OUT": {
+					logout(request, response);
+					break;
+				}
+				case "REGISTER":{
+					register(request,response);
+					break;
+				}
+				}
+				}}
+			
+			
+		 catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}}
+
 		
+	
+	private void login(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 
-		UserDAO userDao=new UserDAO();
-
 		User user;
-		try {
+
+			
 			user = userDao.getUserByNameAndPassword(username,password);
 			if(user==null){
 				//login failed-> send back to login
@@ -48,19 +82,38 @@ public class LoginController extends HttpServlet {
 				rd.forward(request, response);
 			}else{
 				//login success-> send to index.jsp
-				RequestDispatcher rd= request.getRequestDispatcher("/Home");
-				rd.forward(request, response);
+				HttpSession session=request.getSession();
+				session.setAttribute("user", user);
+				response.sendRedirect("Home");
+			
 			}
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		
 	}
+	private void logout(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		response.sendRedirect("Home");
+	}
+	private void register(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		
+		User user = userDao.registerNewAccount(username, password);
+		if (user == null) {
+			request.setAttribute("errorMessage", " username already exists.");
+			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect("login.jsp");
+		}
+	}
+		
+	
+		
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

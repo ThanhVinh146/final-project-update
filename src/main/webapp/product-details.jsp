@@ -61,9 +61,18 @@
 								Us</a></li>
 					</ul>
 					<div class="user_option">
-						<a href=""> <i class="fa fa-user" aria-hidden="true"></i> <span>
-								Login </span>
-						</a> <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+						<c:if test="${empty sessionScope.user}">
+							<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
+								<span> Login </span>
+							</a>
+						</c:if>
+						<c:if test="${not empty sessionScope.user}">
+
+							<a href="login.jsp"> Hello ${sessionScope.user.username} <span>
+									Logout </span>
+							</a>
+						</c:if>
+						 <a href=""> <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 						</a>
 						<form class="form-inline ">
 							<button class="btn nav_search-btn" type="submit">
