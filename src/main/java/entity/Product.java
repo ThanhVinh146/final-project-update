@@ -1,5 +1,13 @@
 package entity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 	private int id;
 	private String name;
@@ -9,23 +17,6 @@ public class Product {
 	private int quantity;
 	private String description;
     
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Product() {}
 
 	public Product(int id, String name, int price, String imgName, boolean isNew) {
 		super();
@@ -47,39 +38,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getImgName() {
-		return imgName;
-	}
-
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public boolean getIsNew() {
 		return isNew;
 	}
-	public void setNew(boolean isNew) {
+
+	public void setIsNew(boolean isNew) {
 		this.isNew = isNew;
 	}
 	

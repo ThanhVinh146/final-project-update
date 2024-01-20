@@ -52,8 +52,7 @@ public class LoginController extends HttpServlet {
 					logout(request, response);
 					break;
 				}
-				case "REGISTER":{
-					register(request,response);
+				default:{
 					break;
 				}
 				}
@@ -95,20 +94,7 @@ public class LoginController extends HttpServlet {
 		session.invalidate();
 		response.sendRedirect("Home");
 	}
-	private void register(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, SQLException {
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		
-		User user = userDao.registerNewAccount(username, password);
-		if (user == null) {
-			request.setAttribute("errorMessage", " username already exists.");
-			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
-			rd.forward(request, response);
-		} else {
-			response.sendRedirect("login.jsp");
-		}
-	}
+	
 		
 	
 		

@@ -1,5 +1,7 @@
 package dao;
 
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,17 +33,19 @@ public class UserDAO {
 	        }
 	    return null;
 	}
-	public User registerNewAccount( String username, String password) throws SQLException {
+	public User registerNewAccount( User user) throws SQLException {
 		Connection connection = Dbconnection.makeConnection();
-		if (checkExistedEmailAndUsername(username)==1) {
-			return null;
+		if (checkExistedEmailAndUsername(user.getUsername())==1) {
+			return user=null;
 		} else {
-			String sqlQuery = "INSERT INTO user (username, password) VALUES (?,?)";
+			String sqlQuery = "INSERT INTO user (username, password,gender,hobby) VALUES (?,?,?,?)";
 			PreparedStatement preStmt = connection.prepareStatement(sqlQuery);
 
 			
-			preStmt.setString(1, username);
-			preStmt.setString(2, password);
+			preStmt.setString(1, user.getUsername());
+			preStmt.setString(2, user.getPassword());
+			preStmt.setString(3, user.getGender());
+			preStmt.setString(4, user.getHobby());
 
 			preStmt.executeUpdate();
 			return new User();

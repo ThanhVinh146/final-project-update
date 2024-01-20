@@ -62,15 +62,22 @@
 				<div class="col-md-5 col-lg-2 px-0">
 
 					<!-- Form -->
-					<form action="LoginController">
-					<input type="text" name="action" hidden="true" value="REGISTER">
+					<form action="Register" method="post">
 						<br> <label for="uname">Username:</label><br> <input
 							type="text" id="uname" name="username"
 							placeholder="Enter your username"><br>
 						<br> <label for="pwd">Password:</label><br> <input
 							type="password" id="pwd" name="password"
-							placeholder="Enter your password"><br> <br> <input
-							type="submit" value="Submit">
+							placeholder="Enter your password"><br> <br> 	
+					Gender:<input type="radio" name="gender" value="Male" id="Male"> <label for="Male">Male</label> <br>
+							<input type="radio" name="gender" value="Female" id="Female"> <label for="Female">Female</label> <br>
+							<input type="radio" name="gender" value="Other" id="Other"> <label for="Other">Other</label> <br><br>
+					Hobbies:<input type="checkbox" name="hobby" value="Eat" id="Eat"> <label for="Eat">Eat</label> <br>
+							<input type="checkbox" name="hobby" value="Sleep" id="Sleep"> <label for="Sleep">Female</label> <br>
+							<input type="checkbox" name="hobby" value="PooPoo" id="PooPoo"> <label for="PooPoo">Other</label> <br><br>
+							<input
+							type="submit" value="Register"/>
+							
 					</form>
 					<!-- Form -->
 
