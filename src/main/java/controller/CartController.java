@@ -29,7 +29,7 @@ public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductDAO productDAO = new ProductDAO();
 	CategoryDao categoryDao=new CategoryDao();
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -110,10 +110,14 @@ public class CartController extends HttpServlet {
 		
 		;
 		session.setAttribute("cart", cart);
-		for(Map.Entry<Product,Integer> entry: cart.getItems().entrySet()) {
-			System.out.print(" Product " +entry.getKey().getName());
-			System.out.print(" quantity "+entry.getValue());
+		double totalMoney=0;
+		for ( Map.Entry<Product,Integer> entry : cart.getItems().entrySet()) {
+		    totalMoney+=entry.getKey().getPrice()*entry.getValue();
+		    cart.setTotal(totalMoney);
 		}
+		
+		session.setAttribute("money", totalMoney);
+		System.out.print(cart.getTotal());
 
 
 		response.sendRedirect("Details?productId="+productId);
@@ -129,6 +133,11 @@ public class CartController extends HttpServlet {
 		rd.forward(request, response);
 		
 		
+	}
+	public void totalMoney(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		
+
 	}
 
 }
