@@ -1,5 +1,5 @@
 package controller;
-
+import at.favre.lib.crypto.bcrypt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 

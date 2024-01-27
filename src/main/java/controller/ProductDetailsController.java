@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CategoryDao;
 import dao.ProductDAO;
 import entity.Product;
 
@@ -36,6 +37,7 @@ public class ProductDetailsController extends HttpServlet {
 		try {
 		Integer productId = null;
 		String productIdFromReq = request.getParameter("productId");
+		CategoryDao categoryDao=new CategoryDao();
 
 		//convert string to int
 		if (productIdFromReq != null) {
@@ -46,7 +48,7 @@ public class ProductDetailsController extends HttpServlet {
 		
 			product = ProductDAO.getProductById(productId);
 			RequestDispatcher rd= request.getRequestDispatcher("/product-details.jsp");
-			
+			request.setAttribute("categories", categoryDao.getAllCategories());
 			request.setAttribute("product", product);
 			rd.forward(request, response);
 		} catch (SQLException e) {

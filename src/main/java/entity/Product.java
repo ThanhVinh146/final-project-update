@@ -45,6 +45,15 @@ public class Product {
 	public void setIsNew(boolean isNew) {
 		this.isNew = isNew;
 	}
-	
+	@Override
+	public int hashCode() {
+		int hash=3;
+		hash=32*hash+id;
+		return hash;
+	}
+	public boolean equals(Object obj) {
+		Product product=(Product) obj;
+		return this.id==product.getId();
+	}
 
 }
