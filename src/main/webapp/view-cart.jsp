@@ -79,11 +79,7 @@
 				</c:if>
 			</div>
 			
-		 <div class="row">
-			<c:if test="${not empty cart.getItems()}">
-			<h4 id="cart-total">Total: ${cart.getTotal()}</h4>			
-			</c:if>
-		</div>
+		 
 	</div>
 			
 	   
