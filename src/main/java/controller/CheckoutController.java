@@ -57,9 +57,9 @@ public class CheckoutController extends HttpServlet {
 			orderDAO.addOrder(user.getId(), sqlSubmitDate);
 			int orderId = orderDAO.getOrderId(userId, sqlSubmitDate);
 			
-			for (HashMap.Entry<Product, Integer> ShoppingCartItem : cart.getItems().entrySet()) {
-				Product Product = ShoppingCartItem.getKey();
-				int quantity = ShoppingCartItem.getValue();
+			for (HashMap.Entry<Product, Integer> CartItem : cart.getItems().entrySet()) {
+				Product Product = CartItem.getKey();
+				int quantity = CartItem.getValue();
 
 				OrderDetails orderDetails = new OrderDetails();
 				orderDetails.setOrderId(orderId); 
