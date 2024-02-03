@@ -49,52 +49,16 @@
 	<section class="shop_section layout_padding">
 		<div class="container">
 			<div class="heading_container heading_center">
-				<h2 class="cart-heading">Your Cart</h2>
-
+				<h2 class="cart-heading">Your order is placed successfully</h2>
 			</div>
 			<div class="row">
-				<c:forEach items="${cart.getItems()}" var="item">
-					<div class="col-sm-6 col-md-4 col-lg-3">
-						<div class="box">
-							<a href="Details?productId=${item.key.id}">
-								<div class="img-box">
-									<img src="images/${item.key.imgName}" alt="">
-								</div>
-								<div class="detail-box">
-									<h6>${item.key.name}</h6>
-									<h6>
-										Quantity<span>$${item.value}</span> Price <span>$${item.key.price}</span>
-									</h6>
-								</div>
-							</a>
-						</div>
-					</div>
-					
+				<a href="cart.jsp">View all your orders</a>
 
-				</c:forEach>
-				</div>
-			<c:if test="${not empty cart.getItems()}">
-				<h4 id="cart-total">Total: ${sessionScope.cart.total}</h4>
-				<c:if test="${empty sessionScope.user}">
-					<a href="login.jsp"> <i class="fa fa-user" aria-hidden="true"></i>
-						<span> PLEASE LOGIN TO CHECKOUT </span>
-					</a>
-				</c:if>
-				<c:if test="${not empty sessionScope.user}">
-					<a href="CheckoutController"><input type="button" value="CHECKOUT"></a>
-				</c:if>
-			</c:if>
+			</div>
+
 		</div>
 
-             
-				<div>
-					<c:if test="${empty cart.getItems()}">
-						<h4>Cart is empty</h4>
-					</c:if>
-				</div>
-
-				</section>
-
+	</section>
 
 	<!-- end shop section -->
 

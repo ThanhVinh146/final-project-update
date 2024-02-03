@@ -108,16 +108,14 @@ public class CartController extends HttpServlet {
 		}
 		
 		
-		;
-		session.setAttribute("cart", cart);
+		
+		
 		double totalMoney=0;
 		for ( Map.Entry<Product,Integer> entry : cart.getItems().entrySet()) {
 		    totalMoney+=entry.getKey().getPrice()*entry.getValue();
 		    cart.setTotal(totalMoney);
 		}
-		
-		session.setAttribute("money", totalMoney);
-		System.out.print(cart.getTotal());
+		session.setAttribute("cart", cart);
 
 
 		response.sendRedirect("Details?productId="+productId);
