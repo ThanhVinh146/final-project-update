@@ -51,10 +51,7 @@
 			<div class="heading_container heading_center">
 				<h2 class="cart-heading">Your order is placed successfully</h2>
 			</div>
-			<div class="row">
-				<a href="cart.jsp">View all your orders</a>
-
-			</div>
+			
 
 		</div>
 
