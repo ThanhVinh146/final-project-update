@@ -70,7 +70,6 @@ public class CheckoutController extends HttpServlet {
 				orderDAO.addOrderDetail(orderDetails.getOrderId(), orderDetails.getProductId(), orderDetails.getPrice(),quantity);
 			}
 
-			request.getRequestDispatcher("success.jsp").forward(request, response);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
