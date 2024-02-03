@@ -36,7 +36,7 @@ public class CheckoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class CheckoutController extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("user");
-			Cart ShoppingCart = (Cart) session.getAttribute("ShoppingCart");
+			Cart cart = (Cart) session.getAttribute("cart");
 			OrderDAO orderDAO = new OrderDAO();
 			
 			int userId =  user.getId();
@@ -57,7 +57,7 @@ public class CheckoutController extends HttpServlet {
 			orderDAO.addOrder(user.getId(), sqlSubmitDate);
 			int orderId = orderDAO.getOrderId(userId, sqlSubmitDate);
 			
-			for (HashMap.Entry<Product, Integer> ShoppingCartItem : ShoppingCart.getItems().entrySet()) {
+			for (HashMap.Entry<Product, Integer> ShoppingCartItem : cart.getItems().entrySet()) {
 				Product Product = ShoppingCartItem.getKey();
 				int quantity = ShoppingCartItem.getValue();
 
